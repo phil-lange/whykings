@@ -306,8 +306,14 @@ body.serif-accent .accent-word {
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(36px, 6vw, 84px); align-items: start;
 }
-@media (max-width: 920px) { .about-grid { grid-template-columns: 1fr; } }
 .about-media { position: sticky; top: 110px; }
+/* Single column: the portrait sits above the text, so sticky has no purpose —
+   and Safari mis-clamps sticky grid items to the whole grid, sliding the
+   portrait down into the text while scrolling. */
+@media (max-width: 920px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-media { position: static; }
+}
 .about-media img {
   width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
   border-radius: var(--radius);
